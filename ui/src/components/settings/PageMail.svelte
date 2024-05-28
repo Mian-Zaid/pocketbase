@@ -35,6 +35,7 @@
 
     $: initialHash = JSON.stringify(originalFormSettings);
 
+    console.log("originalFormSettings: ",originalFormSettings)
     $: hasChanges = initialHash != JSON.stringify(formSettings);
 
     loadSettings();
@@ -44,6 +45,7 @@
 
         try {
             const settings = (await ApiClient.settings.getAll()) || {};
+            console.log("APICLIENT: ",settings)
             init(settings);
         } catch (err) {
             ApiClient.error(err);
@@ -53,10 +55,11 @@
     }
 
     async function save() {
+        console.log("formSetting: ",formSettings)
         if (isSaving || !hasChanges) {
             return;
         }
-
+        
         isSaving = true;
 
         try {
@@ -135,6 +138,19 @@
                 </div>
 
                 <div class="accordions">
+
+                    {
+                        console.log("formSettings.meta: ",formSettings.meta)
+                    }
+                    {#if !formSettings.meta.otpTemplate.hidden}
+                        <EmailTemplateAccordion
+                            single
+                            key="meta.otpTemplate"
+                            title={'Default "OTP" email template'}
+                            bind:config={formSettings.meta.otpTemplate}
+                        />
+                    {/if}
+
                     {#if !formSettings.meta.verificationTemplate.hidden}
                         <EmailTemplateAccordion
                             single

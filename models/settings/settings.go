@@ -78,6 +78,7 @@ func New() *Settings {
 			HideControls:               false,
 			SenderName:                 "Support",
 			SenderAddress:              "support@example.com",
+			OtpTemplate:                defaultOtpTemplate,
 			VerificationTemplate:       defaultVerificationTemplate,
 			ResetPasswordTemplate:      defaultResetPasswordTemplate,
 			ConfirmEmailChangeTemplate: defaultConfirmEmailChangeTemplate,
@@ -508,6 +509,7 @@ type MetaConfig struct {
 	HideControls               bool          `form:"hideControls" json:"hideControls"`
 	SenderName                 string        `form:"senderName" json:"senderName"`
 	SenderAddress              string        `form:"senderAddress" json:"senderAddress"`
+	OtpTemplate                EmailTemplate `form:"otpTemplate" json:"otpTemplate"`
 	VerificationTemplate       EmailTemplate `form:"verificationTemplate" json:"verificationTemplate"`
 	ResetPasswordTemplate      EmailTemplate `form:"resetPasswordTemplate" json:"resetPasswordTemplate"`
 	ConfirmEmailChangeTemplate EmailTemplate `form:"confirmEmailChangeTemplate" json:"confirmEmailChangeTemplate"`
@@ -520,6 +522,7 @@ func (c MetaConfig) Validate() error {
 		validation.Field(&c.AppUrl, validation.Required, is.URL),
 		validation.Field(&c.SenderName, validation.Required, validation.Length(1, 255)),
 		validation.Field(&c.SenderAddress, is.EmailFormat, validation.Required),
+		validation.Field(&c.OtpTemplate, validation.Required),
 		validation.Field(&c.VerificationTemplate, validation.Required),
 		validation.Field(&c.ResetPasswordTemplate, validation.Required),
 		validation.Field(&c.ConfirmEmailChangeTemplate, validation.Required),

@@ -412,7 +412,7 @@ func (app *BaseApp) DB() *dbx.DB {
 	if app.Dao() == nil {
 		return nil
 	}
-
+	
 	db, ok := app.Dao().DB().(*dbx.DB)
 	if !ok {
 		return nil
@@ -582,6 +582,7 @@ func (app *BaseApp) RefreshSettings() error {
 		app.settings = settings.New()
 	}
 
+	color.Blue("Settings Refresh", app.settings)
 	encryptionKey := os.Getenv(app.EncryptionEnv())
 
 	storedSettings, err := app.Dao().FindSettings(encryptionKey)

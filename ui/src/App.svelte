@@ -54,6 +54,7 @@
             const settings = await ApiClient.settings.getAll({
                 $cancelKey: "initialAppSettings",
             });
+            console.log("Initial App setting: ",settings)
             $appName = settings?.meta?.appName || "";
             $hideControls = !!settings?.meta?.hideControls;
         } catch (err) {

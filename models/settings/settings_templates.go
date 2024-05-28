@@ -8,6 +8,21 @@ const (
 	EmailPlaceholderActionUrl string = "{ACTION_URL}"
 )
 
+var defaultOtpTemplate = EmailTemplate{
+	Subject: "Verify your " + EmailPlaceholderAppName + " email",
+	Body: `<p>Hello,</p>
+<p>Thank you for joining us at ` + EmailPlaceholderAppName + `.</p>
+<p>Click on the button below to verify your email address.</p>
+<p>
+  <a class="btn" href="` + EmailPlaceholderActionUrl + `" target="_blank" rel="noopener">Verify</a>
+</p>
+<p>
+  Thanks,<br/>
+  ` + EmailPlaceholderAppName + ` team
+</p>`,
+	ActionUrl: EmailPlaceholderAppUrl + "/_/#/auth/confirm-verification/" + EmailPlaceholderToken,
+}
+
 var defaultVerificationTemplate = EmailTemplate{
 	Subject: "Verify your " + EmailPlaceholderAppName + " email",
 	Body: `<p>Hello,</p>

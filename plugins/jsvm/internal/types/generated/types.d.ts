@@ -17131,6 +17131,7 @@ namespace settings {
   hideControls: boolean
   senderName: string
   senderAddress: string
+  otpTemplate: EmailTemplate
   verificationTemplate: EmailTemplate
   resetPasswordTemplate: EmailTemplate
   confirmEmailChangeTemplate: EmailTemplate
